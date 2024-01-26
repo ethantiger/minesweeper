@@ -1,13 +1,9 @@
 #include <QApplication>
-#include <QWidget>
+#include "./src/gui/mainwindow.h"
 
 int main(int argc, char *argv[]) {
     QApplication app(argc, argv);
-
-    QWidget window;
-    window.resize(250, 150);
-    window.setWindowTitle("Simple exampe");
-    window.show();
-
+    MainWindow w;
+    w.createWindow();
     return app.exec();
 }

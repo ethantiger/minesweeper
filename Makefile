@@ -37,7 +37,7 @@ MOVE          = mv -f
 TAR           = tar -cf
 COMPRESS      = gzip -9f
 DISTNAME      = myapp1.0.0
-DISTDIR = /Users/ethanwakefield/Proj/School/3307/Individual\ Assignment/.tmp/myapp1.0.0
+DISTDIR = /Users/ethanwakefield/Proj/School/3307/minesweeper/.tmp/myapp1.0.0
 LINK          = /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++
 LFLAGS        = -stdlib=libc++ -headerpad_max_install_names $(EXPORT_ARCH_ARGS) -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk -mmacosx-version-min=10.13 -Wl,-rpath,@executable_path/../Frameworks
 LIBS          = $(SUBLIBS) -F/opt/homebrew/Cellar/qt@5/5.15.12/lib -framework QtWidgets -framework QtGui -framework AppKit -framework Metal -framework QtCore -framework DiskArbitration -framework IOKit -framework OpenGL -framework AGL   
@@ -52,8 +52,10 @@ OBJECTS_DIR   = ./
 
 ####### Files
 
-SOURCES       = main.cpp 
-OBJECTS       = main.o
+SOURCES       = main.cpp \
+		src/gui/mainwindow.cpp 
+OBJECTS       = main.o \
+		mainwindow.o
 DIST          = /opt/homebrew/Cellar/qt@5/5.15.12/mkspecs/features/spec_pre.prf \
 		/opt/homebrew/Cellar/qt@5/5.15.12/mkspecs/qdevice.pri \
 		/opt/homebrew/Cellar/qt@5/5.15.12/mkspecs/features/device_config.prf \
@@ -238,6 +240,7 @@ DIST          = /opt/homebrew/Cellar/qt@5/5.15.12/mkspecs/features/spec_pre.prf 
 		/opt/homebrew/Cellar/qt@5/5.15.12/mkspecs/features/qt_config.prf \
 		/opt/homebrew/Cellar/qt@5/5.15.12/mkspecs/macx-clang/qmake.conf \
 		/opt/homebrew/Cellar/qt@5/5.15.12/mkspecs/features/spec_post.prf \
+		.qmake.stash \
 		/opt/homebrew/Cellar/qt@5/5.15.12/mkspecs/features/exclusive_builds.prf \
 		/opt/homebrew/Cellar/qt@5/5.15.12/mkspecs/features/mac/sdk.prf \
 		/opt/homebrew/Cellar/qt@5/5.15.12/mkspecs/features/toolchain.prf \
@@ -265,7 +268,8 @@ DIST          = /opt/homebrew/Cellar/qt@5/5.15.12/mkspecs/features/spec_pre.prf 
 		/opt/homebrew/Cellar/qt@5/5.15.12/mkspecs/features/exceptions.prf \
 		/opt/homebrew/Cellar/qt@5/5.15.12/mkspecs/features/yacc.prf \
 		/opt/homebrew/Cellar/qt@5/5.15.12/mkspecs/features/lex.prf \
-		app.pro  main.cpp
+		app.pro src/gui/mainwindow.h main.cpp \
+		src/gui/mainwindow.cpp
 QMAKE_TARGET  = myapp
 DESTDIR       = 
 TARGET        = myapp.app/Contents/MacOS/myapp
@@ -274,12 +278,12 @@ TARGET        = myapp.app/Contents/MacOS/myapp
 EXPORT_QMAKE_MAC_SDK = macosx
 EXPORT_QMAKE_MAC_SDK_VERSION = 14.2
 EXPORT_QMAKE_XCODE_DEVELOPER_PATH = /Applications/Xcode.app/Contents/Developer
-EXPORT__QMAKE_STASH_ = 
+EXPORT__QMAKE_STASH_ = /Users/ethanwakefield/Proj/School/3307/minesweeper/.qmake.stash
 EXPORT_VALID_ARCHS = arm64
 EXPORT_DEFAULT_ARCHS = arm64
 EXPORT_ARCHS = $(filter $(EXPORT_VALID_ARCHS), $(if $(ARCHS), $(ARCHS), $(if $(EXPORT_DEFAULT_ARCHS), $(EXPORT_DEFAULT_ARCHS), $(EXPORT_VALID_ARCHS))))
 EXPORT_ARCH_ARGS = $(foreach arch, $(if $(EXPORT_ARCHS), $(EXPORT_ARCHS), $(EXPORT_VALID_ARCHS)), -arch $(arch))
-EXPORT__PRO_FILE_ = /Users/ethanwakefield/Proj/School/3307/Individual Assignment/app.pro
+EXPORT__PRO_FILE_ = /Users/ethanwakefield/Proj/School/3307/minesweeper/app.pro
 
 
 include /opt/homebrew/Cellar/qt@5/5.15.12/mkspecs/features/mac/sdk.mk
@@ -474,6 +478,7 @@ Makefile: app.pro /opt/homebrew/Cellar/qt@5/5.15.12/mkspecs/macx-clang/qmake.con
 		/opt/homebrew/Cellar/qt@5/5.15.12/mkspecs/features/qt_config.prf \
 		/opt/homebrew/Cellar/qt@5/5.15.12/mkspecs/macx-clang/qmake.conf \
 		/opt/homebrew/Cellar/qt@5/5.15.12/mkspecs/features/spec_post.prf \
+		.qmake.stash \
 		/opt/homebrew/Cellar/qt@5/5.15.12/mkspecs/features/exclusive_builds.prf \
 		/opt/homebrew/Cellar/qt@5/5.15.12/mkspecs/features/mac/sdk.prf \
 		/opt/homebrew/Cellar/qt@5/5.15.12/mkspecs/features/toolchain.prf \
@@ -690,6 +695,7 @@ Makefile: app.pro /opt/homebrew/Cellar/qt@5/5.15.12/mkspecs/macx-clang/qmake.con
 /opt/homebrew/Cellar/qt@5/5.15.12/mkspecs/features/qt_config.prf:
 /opt/homebrew/Cellar/qt@5/5.15.12/mkspecs/macx-clang/qmake.conf:
 /opt/homebrew/Cellar/qt@5/5.15.12/mkspecs/features/spec_post.prf:
+.qmake.stash:
 /opt/homebrew/Cellar/qt@5/5.15.12/mkspecs/features/exclusive_builds.prf:
 /opt/homebrew/Cellar/qt@5/5.15.12/mkspecs/features/mac/sdk.prf:
 /opt/homebrew/Cellar/qt@5/5.15.12/mkspecs/features/toolchain.prf:
@@ -751,7 +757,8 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents /opt/homebrew/Cellar/qt@5/5.15.12/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents main.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents src/gui/mainwindow.h $(DISTDIR)/
+	$(COPY_FILE) --parents main.cpp src/gui/mainwindow.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -761,6 +768,7 @@ clean: compiler_clean
 
 distclean: clean 
 	-$(DEL_FILE) -r myapp.app
+	-$(DEL_FILE) .qmake.stash
 	-$(DEL_FILE) Makefile
 
 
@@ -805,11 +813,17 @@ compiler_clean: compiler_moc_predefs_clean
 
 ####### Compile
 
-main.o: main.cpp /opt/homebrew/Cellar/qt@5/5.15.12/lib/QtWidgets.framework/Headers/QApplication \
-		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtWidgets.framework/Headers/qapplication.h \
+main.o: main.cpp src/gui/mainwindow.h \
 		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtWidgets.framework/Headers/QWidget \
 		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtWidgets.framework/Headers/qwidget.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o main.cpp
+
+mainwindow.o: src/gui/mainwindow.cpp /opt/homebrew/Cellar/qt@5/5.15.12/lib/QtWidgets.framework/Headers/QApplication \
+		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtWidgets.framework/Headers/qapplication.h \
+		src/gui/mainwindow.h \
+		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtWidgets.framework/Headers/QWidget \
+		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtWidgets.framework/Headers/qwidget.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o src/gui/mainwindow.cpp
 
 ####### Install
 
