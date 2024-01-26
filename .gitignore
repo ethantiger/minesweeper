@@ -1,3 +1,4 @@
 myapp.app
 .qmake.stash
 .vscode
+*.o

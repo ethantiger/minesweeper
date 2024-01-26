@@ -5,6 +5,7 @@
 
 class MainWindow: public QWidget {
   public:
+    MainWindow();
     void createWindow();
 };
 
