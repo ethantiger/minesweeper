@@ -53,9 +53,11 @@ OBJECTS_DIR   = ./
 ####### Files
 
 SOURCES       = main.cpp \
-		src/gui/mainwindow.cpp 
+		src/gui/mainwindow.cpp \
+		src/gui/tile.cpp 
 OBJECTS       = main.o \
-		mainwindow.o
+		mainwindow.o \
+		tile.o
 DIST          = /opt/homebrew/Cellar/qt@5/5.15.12/mkspecs/features/spec_pre.prf \
 		/opt/homebrew/Cellar/qt@5/5.15.12/mkspecs/qdevice.pri \
 		/opt/homebrew/Cellar/qt@5/5.15.12/mkspecs/features/device_config.prf \
@@ -268,8 +270,10 @@ DIST          = /opt/homebrew/Cellar/qt@5/5.15.12/mkspecs/features/spec_pre.prf 
 		/opt/homebrew/Cellar/qt@5/5.15.12/mkspecs/features/exceptions.prf \
 		/opt/homebrew/Cellar/qt@5/5.15.12/mkspecs/features/yacc.prf \
 		/opt/homebrew/Cellar/qt@5/5.15.12/mkspecs/features/lex.prf \
-		app.pro src/gui/mainwindow.h main.cpp \
-		src/gui/mainwindow.cpp
+		app.pro src/gui/mainwindow.h \
+		src/gui/tile.h main.cpp \
+		src/gui/mainwindow.cpp \
+		src/gui/tile.cpp
 QMAKE_TARGET  = myapp
 DESTDIR       = 
 TARGET        = myapp.app/Contents/MacOS/myapp
@@ -757,8 +761,8 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents /opt/homebrew/Cellar/qt@5/5.15.12/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents src/gui/mainwindow.h $(DISTDIR)/
-	$(COPY_FILE) --parents main.cpp src/gui/mainwindow.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents src/gui/mainwindow.h src/gui/tile.h $(DISTDIR)/
+	$(COPY_FILE) --parents main.cpp src/gui/mainwindow.cpp src/gui/tile.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -813,17 +817,38 @@ compiler_clean: compiler_moc_predefs_clean
 
 ####### Compile
 
-main.o: main.cpp src/gui/mainwindow.h \
-		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtWidgets.framework/Headers/QWidget \
-		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtWidgets.framework/Headers/qwidget.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o main.cpp
-
-mainwindow.o: src/gui/mainwindow.cpp /opt/homebrew/Cellar/qt@5/5.15.12/lib/QtWidgets.framework/Headers/QApplication \
+main.o: main.cpp /opt/homebrew/Cellar/qt@5/5.15.12/lib/QtWidgets.framework/Headers/QApplication \
 		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtWidgets.framework/Headers/qapplication.h \
 		src/gui/mainwindow.h \
 		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtWidgets.framework/Headers/QWidget \
-		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtWidgets.framework/Headers/qwidget.h
+		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtWidgets.framework/Headers/qwidget.h \
+		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtWidgets.framework/Headers/QGridLayout \
+		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtWidgets.framework/Headers/qgridlayout.h \
+		src/gui/tile.h \
+		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtWidgets.framework/Headers/QPushButton \
+		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtWidgets.framework/Headers/qpushbutton.h \
+		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtCore.framework/Headers/QString \
+		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtCore.framework/Headers/qstring.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o main.cpp
+
+mainwindow.o: src/gui/mainwindow.cpp src/gui/mainwindow.h \
+		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtWidgets.framework/Headers/QWidget \
+		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtWidgets.framework/Headers/qwidget.h \
+		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtWidgets.framework/Headers/QGridLayout \
+		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtWidgets.framework/Headers/qgridlayout.h \
+		src/gui/tile.h \
+		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtWidgets.framework/Headers/QPushButton \
+		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtWidgets.framework/Headers/qpushbutton.h \
+		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtCore.framework/Headers/QString \
+		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtCore.framework/Headers/qstring.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o src/gui/mainwindow.cpp
+
+tile.o: src/gui/tile.cpp src/gui/tile.h \
+		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtWidgets.framework/Headers/QPushButton \
+		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtWidgets.framework/Headers/qpushbutton.h \
+		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtCore.framework/Headers/QString \
+		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtCore.framework/Headers/qstring.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o tile.o src/gui/tile.cpp
 
 ####### Install
 
