@@ -3,6 +3,7 @@
 
 #include <QPushButton>
 #include <QString>
+#include <QDialog>
 #include <iostream>
 
 class Tile: public QPushButton {

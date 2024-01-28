@@ -828,7 +828,9 @@ main.o: main.cpp /opt/homebrew/Cellar/qt@5/5.15.12/lib/QtWidgets.framework/Heade
 		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtWidgets.framework/Headers/QPushButton \
 		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtWidgets.framework/Headers/qpushbutton.h \
 		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtCore.framework/Headers/QString \
-		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtCore.framework/Headers/qstring.h
+		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtCore.framework/Headers/qstring.h \
+		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtWidgets.framework/Headers/QDialog \
+		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtWidgets.framework/Headers/qdialog.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o main.cpp
 
 mainwindow.o: src/gui/mainwindow.cpp src/gui/mainwindow.h \
@@ -840,14 +842,18 @@ mainwindow.o: src/gui/mainwindow.cpp src/gui/mainwindow.h \
 		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtWidgets.framework/Headers/QPushButton \
 		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtWidgets.framework/Headers/qpushbutton.h \
 		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtCore.framework/Headers/QString \
-		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtCore.framework/Headers/qstring.h
+		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtCore.framework/Headers/qstring.h \
+		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtWidgets.framework/Headers/QDialog \
+		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtWidgets.framework/Headers/qdialog.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o src/gui/mainwindow.cpp
 
 tile.o: src/gui/tile.cpp src/gui/tile.h \
 		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtWidgets.framework/Headers/QPushButton \
 		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtWidgets.framework/Headers/qpushbutton.h \
 		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtCore.framework/Headers/QString \
-		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtCore.framework/Headers/qstring.h
+		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtCore.framework/Headers/qstring.h \
+		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtWidgets.framework/Headers/QDialog \
+		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtWidgets.framework/Headers/qdialog.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o tile.o src/gui/tile.cpp
 
 ####### Install

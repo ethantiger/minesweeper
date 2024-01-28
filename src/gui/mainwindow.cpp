@@ -48,7 +48,7 @@ void MainWindow::createTiles(int r, int c) {
       i--;
     } else {
       tileGrid[random_row][random_col]->setMine(true);
-      tileGrid[random_row][random_col]->setText("M");
+      // tileGrid[random_row][random_col]->setText("M");
     }  
   }
   // Calculate adjacent mines
@@ -72,9 +72,6 @@ void MainWindow::createTiles(int r, int c) {
       if (i + 1  < rows && j - 1 >= 0 && tileGrid[i+1][j-1]->getMine()) tileGrid[i][j]->incrementMinesAdjacent();
       // Check diagonal down right
       if (i + 1 < rows && j + 1 < cols && tileGrid[i+1][j+1]->getMine()) tileGrid[i][j]->incrementMinesAdjacent();
-
-      // int mineCount = tileGrid[i][j]->getMinesAdjacent();
-      // if (mineCount > 0) tileGrid[i][j]->setText(QString("%1").arg(mineCount));
     }
   }
 }
