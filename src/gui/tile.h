@@ -5,8 +5,13 @@
 #include <QString>
 
 class Tile: public QPushButton {
+  private:
+    bool isMine;
+    int minesAdjacent;
   public:
     Tile(const QString &text, QWidget *parent);
+    bool getMine();
+    void setMine(bool);
 };
 
 #endif

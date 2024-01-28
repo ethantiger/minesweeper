@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include <QGridLayout>
+#include <random>
 #include "tile.h"
 
 class MainWindow: public QWidget {
