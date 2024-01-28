@@ -33,8 +33,8 @@ void MainWindow::createTiles(int rows, int cols) {
   // Set 99 tiles to mines at random
   std::random_device rd;
   std::mt19937 gen(rd());
-  std::uniform_int_distribution<> distrcol(0,29);
-  std::uniform_int_distribution<> distrrow(0,15);
+  std::uniform_int_distribution<> distrcol(0,cols-1);
+  std::uniform_int_distribution<> distrrow(0,rows-1);
   for (int i = 0; i < 99; i++) {
     int random_row = distrrow(gen);
     int random_col = distrcol(gen);
@@ -44,5 +44,32 @@ void MainWindow::createTiles(int rows, int cols) {
       tileGrid[random_row][random_col]->setMine(true);
       tileGrid[random_row][random_col]->setText("M");
     }  
+  }
+  // Calculate adjacent mines
+  for (int i = 0; i < rows; i++) {
+    for (int j = 0; j < cols; j++) {
+      // Check if isMine
+      if (tileGrid[i][j]->getMine()) continue;
+      // Check up
+      if (i - 1 >= 0 && tileGrid[i-1][j]->getMine()) tileGrid[i][j]->incrementMinesAdjacent();
+      // Check down
+      if (i + 1 < rows && tileGrid[i+1][j]->getMine()) tileGrid[i][j]->incrementMinesAdjacent();
+      // Check left
+      if (j - 1  >= 0 && tileGrid[i][j-1]->getMine()) tileGrid[i][j]->incrementMinesAdjacent();
+      // Check right
+      if (j + 1  < cols && tileGrid[i][j+1]->getMine()) tileGrid[i][j]->incrementMinesAdjacent();
+      // Check diagonal up left
+      if (i - 1  >= 0 && j - 1 >= 0 && tileGrid[i-1][j-1]->getMine()) tileGrid[i][j]->incrementMinesAdjacent();
+      // Check diagonal up right
+      if (i - 1  >= 0 && j + 1 < cols && tileGrid[i-1][j+1]->getMine()) tileGrid[i][j]->incrementMinesAdjacent();
+      // Check diagonal down left
+      if (i + 1  < rows && j - 1 >= 0 && tileGrid[i+1][j-1]->getMine()) tileGrid[i][j]->incrementMinesAdjacent();
+      // Check diagonal down right
+      if (i + 1 < rows && j + 1 < cols && tileGrid[i+1][j+1]->getMine()) tileGrid[i][j]->incrementMinesAdjacent();
+
+      int mineCount = tileGrid[i][j]->getMinesAdjacent();
+      
+      if (mineCount > 0) tileGrid[i][j]->setText(QString("%1").arg(mineCount));
+    }
   }
 }

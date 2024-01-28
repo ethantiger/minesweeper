@@ -12,6 +12,8 @@ class Tile: public QPushButton {
     Tile(const QString &text, QWidget *parent);
     bool getMine();
     void setMine(bool);
+    int getMinesAdjacent();
+    int incrementMinesAdjacent();
 };
 
 #endif
