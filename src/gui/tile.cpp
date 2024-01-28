@@ -22,3 +22,19 @@ int Tile::incrementMinesAdjacent() {
   minesAdjacent += 1;
   return minesAdjacent;
 }
+
+bool Tile::getExplored() {
+  return explored;
+}
+
+int Tile::explore() {
+  explored = true;
+  if (isMine) {
+    // end game
+    return -1;
+  }
+  if (minesAdjacent) {
+    this->setText(QString("%1").arg(minesAdjacent));
+  }
+  return minesAdjacent;
+}

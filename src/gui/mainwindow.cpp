@@ -21,11 +21,17 @@ void MainWindow::setupGrid() {
   this->setLayout(gridLayout);
 }
 
-void MainWindow::createTiles(int rows, int cols) {
+void MainWindow::createTiles(int r, int c) {
+  rows = r;
+  cols = c;
   tileGrid = std::vector<std::vector<Tile*>>(rows, std::vector<Tile*>(cols));
   for (int i = 0; i < rows; i++) {
     for (int j = 0; j < cols; j++) {
       Tile *tile = new Tile("", nullptr);
+      QObject::connect(tile, &QPushButton::clicked, [this, tile, i, j]() {
+          explore(tile,i,j);
+      });
+
       gridLayout->addWidget(tile,i,j);
       tileGrid[i][j] = tile;
     }
@@ -67,9 +73,33 @@ void MainWindow::createTiles(int rows, int cols) {
       // Check diagonal down right
       if (i + 1 < rows && j + 1 < cols && tileGrid[i+1][j+1]->getMine()) tileGrid[i][j]->incrementMinesAdjacent();
 
-      int mineCount = tileGrid[i][j]->getMinesAdjacent();
-      
-      if (mineCount > 0) tileGrid[i][j]->setText(QString("%1").arg(mineCount));
+      // int mineCount = tileGrid[i][j]->getMinesAdjacent();
+      // if (mineCount > 0) tileGrid[i][j]->setText(QString("%1").arg(mineCount));
     }
   }
+}
+
+void MainWindow::explore(Tile *t, int i, int j) {
+  if (t->getExplored()) return;
+  int mines = t->explore();
+  if (mines == 0) {
+    // Explore surrounding mines
+    // Up
+    if (i - 1 >= 0 && !tileGrid[i-1][j]->getMine()) explore(tileGrid[i-1][j], i-1,j);
+    // Down
+    if (i + 1 < rows && !tileGrid[i+1][j]->getMine()) explore(tileGrid[i+1][j], i+1,j);
+    // Left
+    if (j - 1  >= 0 && !tileGrid[i][j-1]->getMine()) explore(tileGrid[i][j-1], i,j-1);
+    // Right
+    if (j + 1  < cols && !tileGrid[i][j+1]->getMine()) explore(tileGrid[i][j+1], i,j+1);
+    // diagonal up left
+    if (i - 1  >= 0 && j - 1 >= 0 && !tileGrid[i-1][j-1]->getMine()) explore(tileGrid[i-1][j-1], i-1,j-1);
+    // diagonal up right
+    if (i - 1  >= 0 && j + 1 < cols && !tileGrid[i-1][j+1]->getMine()) explore(tileGrid[i-1][j+1], i-1,j+1);
+    // diagonal down left
+    if (i + 1  < rows && j - 1 >= 0 && !tileGrid[i+1][j-1]->getMine()) explore(tileGrid[i+1][j-1], i+1,j-1);
+    // diagonal down right
+    if (i + 1 < rows && j + 1 < cols && !tileGrid[i+1][j+1]->getMine()) explore(tileGrid[i+1][j+1], i+1,j+1);
+  }
+  
 }
