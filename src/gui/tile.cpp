@@ -1,7 +1,8 @@
 #include "tile.h"
 
 Tile::Tile(const QString &text, QWidget *parent = nullptr): QPushButton(text, parent) {
-  int size = 50;
+  int size = 35;
+  this->setStyleSheet("QPushButton {border:1px solid;}");
   // this->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
   setFixedSize(size,size);
 }
@@ -29,6 +30,7 @@ bool Tile::getExplored() {
 
 int Tile::explore() {
   explored = true;
+  this->setStyleSheet("QPushButton {background:#222021;}");
   if (isMine) {
     // end game
     return -1;
