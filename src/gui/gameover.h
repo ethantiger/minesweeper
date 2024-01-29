@@ -4,7 +4,6 @@
 #include <QDialog>
 #include <QPushButton>
 #include <QGridLayout>
-#include <QDebug>
 #include <QCoreApplication>
 
 class GameOverPopup: public QDialog {

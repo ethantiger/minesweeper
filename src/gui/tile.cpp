@@ -30,6 +30,7 @@ bool Tile::getExplored() {
 
 int Tile::explore() {
   explored = true;
+  setIcon(QIcon());
   this->setStyleSheet("QPushButton {background:#222021;}");
   if (isMine) {
     // end game
@@ -45,4 +46,32 @@ int Tile::explore() {
     this->setText(QString("%1").arg(minesAdjacent));
   }
   return minesAdjacent;
+}
+
+void Tile::mousePressEvent(QMouseEvent *event) {
+  if (event->button() == Qt::RightButton) {
+    flag();
+  } else {
+    QPushButton::mousePressEvent(event);
+  }
+}
+
+void Tile::flag() {
+  if (explored) return;
+  if (flagState == BLANK) {
+    flagState = FLAGGED;
+    setIcon(QIcon("./assets/minesweeper_icons/mine_flag.png"));
+    return;
+  }
+  if (flagState == FLAGGED) {
+    flagState = QUESTIONMARK;
+    setText("?");
+    setIcon(QIcon());
+    return;
+  }
+  if (flagState == QUESTIONMARK) {
+    flagState = BLANK;
+    setText("");
+    return;
+  }
 }

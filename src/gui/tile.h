@@ -5,8 +5,16 @@
 #include <QString>
 #include <QDialog>
 #include <iostream>
+#include <QMouseEvent>
 #include "gameover.h"
+
 #include <QDebug>
+
+enum FlagStates {
+  BLANK,
+  FLAGGED,
+  QUESTIONMARK
+};
 
 class Tile: public QPushButton {
   Q_OBJECT
@@ -14,6 +22,10 @@ class Tile: public QPushButton {
     bool isMine = false;
     int minesAdjacent;
     bool explored = false;
+    FlagStates flagState = BLANK;
+
+  protected:
+    void mousePressEvent(QMouseEvent *event);
 
   public:
     Tile(const QString &text, QWidget *parent);
@@ -23,6 +35,7 @@ class Tile: public QPushButton {
     int incrementMinesAdjacent();
     bool getExplored();
     int explore();
+    void flag();
 
   signals:
     void gameOverReceived();
