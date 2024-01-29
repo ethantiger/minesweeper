@@ -5,8 +5,11 @@
 #include <QString>
 #include <QDialog>
 #include <iostream>
+#include "gameover.h"
+#include <QDebug>
 
 class Tile: public QPushButton {
+  Q_OBJECT
   private:
     bool isMine = false;
     int minesAdjacent;
@@ -20,6 +23,10 @@ class Tile: public QPushButton {
     int incrementMinesAdjacent();
     bool getExplored();
     int explore();
+
+  signals:
+    void gameOverReceived();
+
 };
 
 #endif

@@ -31,7 +31,7 @@ void MainWindow::createTiles(int r, int c) {
       QObject::connect(tile, &QPushButton::clicked, [this, tile, i, j]() {
           explore(tile,i,j);
       });
-
+      connect(tile, &Tile::gameOverReceived, this, &MainWindow::resetGame);
       gridLayout->addWidget(tile,i,j);
       tileGrid[i][j] = tile;
     }
@@ -99,4 +99,22 @@ void MainWindow::explore(Tile *t, int i, int j) {
     if (i + 1 < rows && j + 1 < cols && !tileGrid[i+1][j+1]->getMine()) explore(tileGrid[i+1][j+1], i+1,j+1);
   }
   
+}
+
+void MainWindow::resetGame() {
+  // // Remove tiles
+  for (auto& row : tileGrid) {
+    for (auto& tile : row) {
+        if (tile->parent()) {
+            tile->setParent(nullptr); // Remove from parent widget
+        }
+    }
+  }
+  for (auto& row : tileGrid) {
+    row.clear(); // Clear each inner vector
+  }
+  tileGrid.clear(); // Clear the outer vector
+
+  // // Recreate Tiles
+  createTiles(16,30);
 }

@@ -33,12 +33,11 @@ int Tile::explore() {
   this->setStyleSheet("QPushButton {background:#222021;}");
   if (isMine) {
     // end game
-    QDialog popup;
-    popup.setWindowTitle("Game Over");
-    popup.setModal(true);
-
-    // Optionally add components to the popup here
-
+    setText("M");
+    GameOverPopup popup;
+    QObject::connect(&popup, &GameOverPopup::gameOverSignal,[this]() {
+      emit gameOverReceived();
+    });
     popup.exec();
     return -1;
   }

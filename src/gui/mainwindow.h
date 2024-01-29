@@ -7,6 +7,7 @@
 #include "tile.h"
 
 class MainWindow: public QWidget {
+  Q_OBJECT
   private:
     QGridLayout *gridLayout;
     std::vector<std::vector<Tile*>> tileGrid;
@@ -18,9 +19,11 @@ class MainWindow: public QWidget {
     void setupWindow();
     void setupGrid();
     void createTiles(int, int);
+    
 
   private slots:
     void explore(Tile *, int, int);
+    void resetGame();
 };
 
 #endif

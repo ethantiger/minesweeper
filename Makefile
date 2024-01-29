@@ -53,11 +53,18 @@ OBJECTS_DIR   = ./
 ####### Files
 
 SOURCES       = main.cpp \
+		src/gui/gameover.cpp \
 		src/gui/mainwindow.cpp \
-		src/gui/tile.cpp 
+		src/gui/tile.cpp moc_gameover.cpp \
+		moc_mainwindow.cpp \
+		moc_tile.cpp
 OBJECTS       = main.o \
+		gameover.o \
 		mainwindow.o \
-		tile.o
+		tile.o \
+		moc_gameover.o \
+		moc_mainwindow.o \
+		moc_tile.o
 DIST          = /opt/homebrew/Cellar/qt@5/5.15.12/mkspecs/features/spec_pre.prf \
 		/opt/homebrew/Cellar/qt@5/5.15.12/mkspecs/qdevice.pri \
 		/opt/homebrew/Cellar/qt@5/5.15.12/mkspecs/features/device_config.prf \
@@ -270,8 +277,10 @@ DIST          = /opt/homebrew/Cellar/qt@5/5.15.12/mkspecs/features/spec_pre.prf 
 		/opt/homebrew/Cellar/qt@5/5.15.12/mkspecs/features/exceptions.prf \
 		/opt/homebrew/Cellar/qt@5/5.15.12/mkspecs/features/yacc.prf \
 		/opt/homebrew/Cellar/qt@5/5.15.12/mkspecs/features/lex.prf \
-		app.pro src/gui/mainwindow.h \
+		app.pro src/gui/gameover.h \
+		src/gui/mainwindow.h \
 		src/gui/tile.h main.cpp \
+		src/gui/gameover.cpp \
 		src/gui/mainwindow.cpp \
 		src/gui/tile.cpp
 QMAKE_TARGET  = minesweeper
@@ -761,8 +770,8 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents /opt/homebrew/Cellar/qt@5/5.15.12/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents src/gui/mainwindow.h src/gui/tile.h $(DISTDIR)/
-	$(COPY_FILE) --parents main.cpp src/gui/mainwindow.cpp src/gui/tile.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents src/gui/gameover.h src/gui/mainwindow.h src/gui/tile.h $(DISTDIR)/
+	$(COPY_FILE) --parents main.cpp src/gui/gameover.cpp src/gui/mainwindow.cpp src/gui/tile.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -797,8 +806,57 @@ compiler_moc_predefs_clean:
 moc_predefs.h: /opt/homebrew/Cellar/qt@5/5.15.12/mkspecs/features/data/dummy.cpp
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++ -pipe -stdlib=libc++ -O2 -std=gnu++11 $(EXPORT_ARCH_ARGS) -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk -mmacosx-version-min=10.13 -Wall -Wextra -dM -E -o moc_predefs.h /opt/homebrew/Cellar/qt@5/5.15.12/mkspecs/features/data/dummy.cpp
 
-compiler_moc_header_make_all:
+compiler_moc_header_make_all: moc_gameover.cpp moc_mainwindow.cpp moc_tile.cpp
 compiler_moc_header_clean:
+	-$(DEL_FILE) moc_gameover.cpp moc_mainwindow.cpp moc_tile.cpp
+moc_gameover.cpp: src/gui/gameover.h \
+		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtWidgets.framework/Headers/QDialog \
+		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtWidgets.framework/Headers/qdialog.h \
+		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtWidgets.framework/Headers/QPushButton \
+		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtWidgets.framework/Headers/qpushbutton.h \
+		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtWidgets.framework/Headers/QGridLayout \
+		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtWidgets.framework/Headers/qgridlayout.h \
+		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtCore.framework/Headers/QDebug \
+		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtCore.framework/Headers/qdebug.h \
+		moc_predefs.h \
+		/opt/homebrew/Cellar/qt@5/5.15.12/bin/moc
+	/opt/homebrew/Cellar/qt@5/5.15.12/bin/moc $(DEFINES) --include /Users/ethanwakefield/Proj/School/3307/minesweeper/moc_predefs.h -I/opt/homebrew/Cellar/qt@5/5.15.12/mkspecs/macx-clang -I/Users/ethanwakefield/Proj/School/3307/minesweeper -I/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtWidgets.framework/Headers -I/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtGui.framework/Headers -I/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtCore.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/15.0.0/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk/usr/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -F/opt/homebrew/Cellar/qt@5/5.15.12/lib src/gui/gameover.h -o moc_gameover.cpp
+
+moc_mainwindow.cpp: src/gui/mainwindow.h \
+		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtWidgets.framework/Headers/QWidget \
+		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtWidgets.framework/Headers/qwidget.h \
+		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtWidgets.framework/Headers/QGridLayout \
+		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtWidgets.framework/Headers/qgridlayout.h \
+		src/gui/tile.h \
+		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtWidgets.framework/Headers/QPushButton \
+		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtWidgets.framework/Headers/qpushbutton.h \
+		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtCore.framework/Headers/QString \
+		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtCore.framework/Headers/qstring.h \
+		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtWidgets.framework/Headers/QDialog \
+		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtWidgets.framework/Headers/qdialog.h \
+		src/gui/gameover.h \
+		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtCore.framework/Headers/QDebug \
+		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtCore.framework/Headers/qdebug.h \
+		moc_predefs.h \
+		/opt/homebrew/Cellar/qt@5/5.15.12/bin/moc
+	/opt/homebrew/Cellar/qt@5/5.15.12/bin/moc $(DEFINES) --include /Users/ethanwakefield/Proj/School/3307/minesweeper/moc_predefs.h -I/opt/homebrew/Cellar/qt@5/5.15.12/mkspecs/macx-clang -I/Users/ethanwakefield/Proj/School/3307/minesweeper -I/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtWidgets.framework/Headers -I/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtGui.framework/Headers -I/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtCore.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/15.0.0/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk/usr/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -F/opt/homebrew/Cellar/qt@5/5.15.12/lib src/gui/mainwindow.h -o moc_mainwindow.cpp
+
+moc_tile.cpp: src/gui/tile.h \
+		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtWidgets.framework/Headers/QPushButton \
+		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtWidgets.framework/Headers/qpushbutton.h \
+		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtCore.framework/Headers/QString \
+		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtCore.framework/Headers/qstring.h \
+		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtWidgets.framework/Headers/QDialog \
+		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtWidgets.framework/Headers/qdialog.h \
+		src/gui/gameover.h \
+		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtWidgets.framework/Headers/QGridLayout \
+		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtWidgets.framework/Headers/qgridlayout.h \
+		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtCore.framework/Headers/QDebug \
+		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtCore.framework/Headers/qdebug.h \
+		moc_predefs.h \
+		/opt/homebrew/Cellar/qt@5/5.15.12/bin/moc
+	/opt/homebrew/Cellar/qt@5/5.15.12/bin/moc $(DEFINES) --include /Users/ethanwakefield/Proj/School/3307/minesweeper/moc_predefs.h -I/opt/homebrew/Cellar/qt@5/5.15.12/mkspecs/macx-clang -I/Users/ethanwakefield/Proj/School/3307/minesweeper -I/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtWidgets.framework/Headers -I/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtGui.framework/Headers -I/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtCore.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/15.0.0/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk/usr/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -F/opt/homebrew/Cellar/qt@5/5.15.12/lib src/gui/tile.h -o moc_tile.cpp
+
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
 compiler_moc_source_make_all:
@@ -813,7 +871,7 @@ compiler_yacc_impl_make_all:
 compiler_yacc_impl_clean:
 compiler_lex_make_all:
 compiler_lex_clean:
-compiler_clean: compiler_moc_predefs_clean 
+compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean 
 
 ####### Compile
 
@@ -830,8 +888,22 @@ main.o: main.cpp /opt/homebrew/Cellar/qt@5/5.15.12/lib/QtWidgets.framework/Heade
 		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtCore.framework/Headers/QString \
 		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtCore.framework/Headers/qstring.h \
 		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtWidgets.framework/Headers/QDialog \
-		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtWidgets.framework/Headers/qdialog.h
+		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtWidgets.framework/Headers/qdialog.h \
+		src/gui/gameover.h \
+		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtCore.framework/Headers/QDebug \
+		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtCore.framework/Headers/qdebug.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o main.cpp
+
+gameover.o: src/gui/gameover.cpp src/gui/gameover.h \
+		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtWidgets.framework/Headers/QDialog \
+		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtWidgets.framework/Headers/qdialog.h \
+		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtWidgets.framework/Headers/QPushButton \
+		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtWidgets.framework/Headers/qpushbutton.h \
+		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtWidgets.framework/Headers/QGridLayout \
+		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtWidgets.framework/Headers/qgridlayout.h \
+		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtCore.framework/Headers/QDebug \
+		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtCore.framework/Headers/qdebug.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o gameover.o src/gui/gameover.cpp
 
 mainwindow.o: src/gui/mainwindow.cpp src/gui/mainwindow.h \
 		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtWidgets.framework/Headers/QWidget \
@@ -844,7 +916,10 @@ mainwindow.o: src/gui/mainwindow.cpp src/gui/mainwindow.h \
 		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtCore.framework/Headers/QString \
 		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtCore.framework/Headers/qstring.h \
 		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtWidgets.framework/Headers/QDialog \
-		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtWidgets.framework/Headers/qdialog.h
+		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtWidgets.framework/Headers/qdialog.h \
+		src/gui/gameover.h \
+		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtCore.framework/Headers/QDebug \
+		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtCore.framework/Headers/qdebug.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o src/gui/mainwindow.cpp
 
 tile.o: src/gui/tile.cpp src/gui/tile.h \
@@ -853,8 +928,22 @@ tile.o: src/gui/tile.cpp src/gui/tile.h \
 		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtCore.framework/Headers/QString \
 		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtCore.framework/Headers/qstring.h \
 		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtWidgets.framework/Headers/QDialog \
-		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtWidgets.framework/Headers/qdialog.h
+		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtWidgets.framework/Headers/qdialog.h \
+		src/gui/gameover.h \
+		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtWidgets.framework/Headers/QGridLayout \
+		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtWidgets.framework/Headers/qgridlayout.h \
+		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtCore.framework/Headers/QDebug \
+		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtCore.framework/Headers/qdebug.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o tile.o src/gui/tile.cpp
+
+moc_gameover.o: moc_gameover.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_gameover.o moc_gameover.cpp
+
+moc_mainwindow.o: moc_mainwindow.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_mainwindow.o moc_mainwindow.cpp
+
+moc_tile.o: moc_tile.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_tile.o moc_tile.cpp
 
 ####### Install
 
