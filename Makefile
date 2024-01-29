@@ -55,13 +55,15 @@ OBJECTS_DIR   = ./
 SOURCES       = main.cpp \
 		src/gui/mainwindow.cpp \
 		src/gui/popup.cpp \
-		src/gui/tile.cpp moc_mainwindow.cpp \
+		src/gui/tile.cpp qrc_icons.cpp \
+		moc_mainwindow.cpp \
 		moc_popup.cpp \
 		moc_tile.cpp
 OBJECTS       = main.o \
 		mainwindow.o \
 		popup.o \
 		tile.o \
+		qrc_icons.o \
 		moc_mainwindow.o \
 		moc_popup.o \
 		moc_tile.o
@@ -520,6 +522,7 @@ Makefile: app.pro /opt/homebrew/Cellar/qt@5/5.15.12/mkspecs/macx-clang/qmake.con
 		/opt/homebrew/Cellar/qt@5/5.15.12/mkspecs/features/yacc.prf \
 		/opt/homebrew/Cellar/qt@5/5.15.12/mkspecs/features/lex.prf \
 		app.pro \
+		icons.qrc \
 		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtWidgets.framework/Resources/QtWidgets.prl \
 		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtGui.framework/Resources/QtGui.prl \
 		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtCore.framework/Resources/QtCore.prl
@@ -737,6 +740,7 @@ Makefile: app.pro /opt/homebrew/Cellar/qt@5/5.15.12/mkspecs/macx-clang/qmake.con
 /opt/homebrew/Cellar/qt@5/5.15.12/mkspecs/features/yacc.prf:
 /opt/homebrew/Cellar/qt@5/5.15.12/mkspecs/features/lex.prf:
 app.pro:
+icons.qrc:
 /opt/homebrew/Cellar/qt@5/5.15.12/lib/QtWidgets.framework/Resources/QtWidgets.prl:
 /opt/homebrew/Cellar/qt@5/5.15.12/lib/QtGui.framework/Resources/QtGui.prl:
 /opt/homebrew/Cellar/qt@5/5.15.12/lib/QtCore.framework/Resources/QtCore.prl:
@@ -769,6 +773,7 @@ dist: distdir FORCE
 distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
+	$(COPY_FILE) --parents icons.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents /opt/homebrew/Cellar/qt@5/5.15.12/mkspecs/features/data/dummy.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents src/gui/mainwindow.h src/gui/popup.h src/gui/tile.h $(DISTDIR)/
 	$(COPY_FILE) --parents main.cpp src/gui/mainwindow.cpp src/gui/popup.cpp src/gui/tile.cpp $(DISTDIR)/
@@ -798,8 +803,16 @@ check: first
 
 benchmark: first
 
-compiler_rcc_make_all:
+compiler_rcc_make_all: qrc_icons.cpp
 compiler_rcc_clean:
+	-$(DEL_FILE) qrc_icons.cpp
+qrc_icons.cpp: icons.qrc \
+		/opt/homebrew/Cellar/qt@5/5.15.12/bin/rcc \
+		assets/minesweeper_icons/bomb.png \
+		assets/minesweeper_icons/mine_flag.png \
+		assets/minesweeper_icons/bomb_explode.png
+	/opt/homebrew/Cellar/qt@5/5.15.12/bin/rcc -name icons icons.qrc -o qrc_icons.cpp
+
 compiler_moc_predefs_make_all: moc_predefs.h
 compiler_moc_predefs_clean:
 	-$(DEL_FILE) moc_predefs.h
@@ -879,7 +892,7 @@ compiler_yacc_impl_make_all:
 compiler_yacc_impl_clean:
 compiler_lex_make_all:
 compiler_lex_clean:
-compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean 
+compiler_clean: compiler_rcc_clean compiler_moc_predefs_clean compiler_moc_header_clean 
 
 ####### Compile
 
@@ -955,6 +968,9 @@ tile.o: src/gui/tile.cpp src/gui/tile.h \
 		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtCore.framework/Headers/QDebug \
 		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtCore.framework/Headers/qdebug.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o tile.o src/gui/tile.cpp
+
+qrc_icons.o: qrc_icons.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_icons.o qrc_icons.cpp
 
 moc_mainwindow.o: moc_mainwindow.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_mainwindow.o moc_mainwindow.cpp

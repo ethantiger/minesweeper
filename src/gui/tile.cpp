@@ -34,7 +34,7 @@ int Tile::explore() {
   this->setStyleSheet("QPushButton {background:#222021;}");
   if (isMine) {
     // end game
-    setIcon(QIcon("./assets/minesweeper_icons/bomb_explode.png"));
+    setIcon(QIcon(":/assets/minesweeper_icons/bomb_explode.png"));
     setIconSize(QSize(size,size));
     Popup p("Game Over", "Retry");
     QObject::connect(&p, &Popup::gameOverSignal,[this]() {
@@ -61,7 +61,7 @@ void Tile::flag() {
   if (explored) return;
   if (flagState == BLANK) {
     flagState = FLAGGED;
-    setIcon(QIcon("./assets/minesweeper_icons/mine_flag.png"));
+    setIcon(QIcon(":/assets/minesweeper_icons/mine_flag.png"));
     setIconSize(QSize(size-3,size-3));
     return;
   }
