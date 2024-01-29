@@ -16,6 +16,7 @@ void GameOverPopup::createButtons() {
     emit gameOverSignal();
     close();
   });
+  QObject::connect(quit, &QPushButton::clicked, qApp, &QCoreApplication::quit);
   gridLayout->addWidget(retry,0,0);
   gridLayout->addWidget(quit,0,1);
 }
