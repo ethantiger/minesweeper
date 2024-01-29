@@ -19,6 +19,7 @@ enum FlagStates {
 class Tile: public QPushButton {
   Q_OBJECT
   private:
+    int size;
     bool isMine = false;
     int minesAdjacent;
     bool explored = false;

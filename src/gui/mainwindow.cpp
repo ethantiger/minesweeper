@@ -49,7 +49,7 @@ void MainWindow::createTiles(int r, int c) {
       i--;
     } else {
       tileGrid[random_row][random_col]->setMine(true);
-      tileGrid[random_row][random_col]->setText("M");
+      // tileGrid[random_row][random_col]->setText("M");
     }  
   }
   // Calculate adjacent mines

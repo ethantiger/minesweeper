@@ -1,7 +1,7 @@
 #include "tile.h"
 
 Tile::Tile(const QString &text, QWidget *parent = nullptr): QPushButton(text, parent) {
-  int size = 35;
+  size = 35;
   this->setStyleSheet("QPushButton {border:1px solid;}");
   // this->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
   setFixedSize(size,size);
@@ -34,7 +34,8 @@ int Tile::explore() {
   this->setStyleSheet("QPushButton {background:#222021;}");
   if (isMine) {
     // end game
-    setText("M");
+    setIcon(QIcon("./assets/minesweeper_icons/bomb_explode.png"));
+    setIconSize(QSize(size,size));
     Popup p("Game Over", "Retry");
     QObject::connect(&p, &Popup::gameOverSignal,[this]() {
       emit gameOverReceived();
@@ -61,6 +62,7 @@ void Tile::flag() {
   if (flagState == BLANK) {
     flagState = FLAGGED;
     setIcon(QIcon("./assets/minesweeper_icons/mine_flag.png"));
+    setIconSize(QSize(size,size));
     return;
   }
   if (flagState == FLAGGED) {
