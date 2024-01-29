@@ -2,3 +2,4 @@ minesweeper.app
 .qmake.stash
 .vscode
 *.o
+.DS_Store
