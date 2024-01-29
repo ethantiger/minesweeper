@@ -11,8 +11,8 @@ class Popup: public QDialog {
   private:
     QGridLayout *gridLayout;
   public:
-    Popup(char *, char *);
-    void createButtons(char *);
+    Popup(const char *, const char *);
+    void createButtons(const char *);
     void setupGrid();
 
   signals:

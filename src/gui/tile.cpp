@@ -62,7 +62,7 @@ void Tile::flag() {
   if (flagState == BLANK) {
     flagState = FLAGGED;
     setIcon(QIcon("./assets/minesweeper_icons/mine_flag.png"));
-    setIconSize(QSize(size,size));
+    setIconSize(QSize(size-3,size-3));
     return;
   }
   if (flagState == FLAGGED) {

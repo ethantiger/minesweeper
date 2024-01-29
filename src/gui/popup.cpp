@@ -1,6 +1,6 @@
 #include "popup.h"
 
-Popup::Popup(char *title, char *button) {
+Popup::Popup(const char *title, const char *button) {
   setWindowTitle(title);
   setWindowFlags(Qt::Dialog | Qt::WindowTitleHint | Qt::CustomizeWindowHint);
   resize(200,50);
@@ -9,7 +9,7 @@ Popup::Popup(char *title, char *button) {
   createButtons(button);
 }
 
-void Popup::createButtons(char *button) {
+void Popup::createButtons(const char *button) {
   QPushButton *retry = new QPushButton(button, this);
   QPushButton *quit = new QPushButton("Quit", this);
   QObject::connect(retry, &QPushButton::clicked, [this]() {
