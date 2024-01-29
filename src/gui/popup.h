@@ -1,18 +1,18 @@
-#ifndef GAMEOVER
-#define GAMEOVER
+#ifndef POPUP
+#define POPUP
 
 #include <QDialog>
 #include <QPushButton>
 #include <QGridLayout>
 #include <QCoreApplication>
 
-class GameOverPopup: public QDialog {
+class Popup: public QDialog {
   Q_OBJECT
   private:
     QGridLayout *gridLayout;
   public:
-    GameOverPopup();
-    void createButtons();
+    Popup(char *, char *);
+    void createButtons(char *);
     void setupGrid();
 
   signals:

@@ -5,6 +5,7 @@
 #include <QGridLayout>
 #include <random>
 #include "tile.h"
+#include "popup.h"
 
 class MainWindow: public QWidget {
   Q_OBJECT
@@ -13,6 +14,7 @@ class MainWindow: public QWidget {
     std::vector<std::vector<Tile*>> tileGrid;
     int rows;
     int cols;
+    int tilesRemaining;
 
   public:
     MainWindow();

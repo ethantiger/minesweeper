@@ -22,6 +22,7 @@ void MainWindow::setupGrid() {
 }
 
 void MainWindow::createTiles(int r, int c) {
+  tilesRemaining = r * c - 99;
   rows = r;
   cols = c;
   tileGrid = std::vector<std::vector<Tile*>>(rows, std::vector<Tile*>(cols));
@@ -48,7 +49,7 @@ void MainWindow::createTiles(int r, int c) {
       i--;
     } else {
       tileGrid[random_row][random_col]->setMine(true);
-      // tileGrid[random_row][random_col]->setText("M");
+      tileGrid[random_row][random_col]->setText("M");
     }  
   }
   // Calculate adjacent mines
@@ -98,7 +99,15 @@ void MainWindow::explore(Tile *t, int i, int j) {
     // diagonal down right
     if (i + 1 < rows && j + 1 < cols && !tileGrid[i+1][j+1]->getMine()) explore(tileGrid[i+1][j+1], i+1,j+1);
   }
-  
+  tilesRemaining--;
+  if (tilesRemaining == 0) {
+    // win
+    Popup p("You Win", "Play again?");
+    QObject::connect(&p, &Popup::gameOverSignal,[this]() {
+      resetGame();
+    });
+    p.exec();
+  }
 }
 
 void MainWindow::resetGame() {

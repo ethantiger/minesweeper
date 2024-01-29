@@ -35,11 +35,11 @@ int Tile::explore() {
   if (isMine) {
     // end game
     setText("M");
-    GameOverPopup popup;
-    QObject::connect(&popup, &GameOverPopup::gameOverSignal,[this]() {
+    Popup p("Game Over", "Retry");
+    QObject::connect(&p, &Popup::gameOverSignal,[this]() {
       emit gameOverReceived();
     });
-    popup.exec();
+    p.exec();
     return -1;
   }
   if (minesAdjacent) {

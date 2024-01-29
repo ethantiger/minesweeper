@@ -6,7 +6,7 @@
 #include <QDialog>
 #include <iostream>
 #include <QMouseEvent>
-#include "gameover.h"
+#include "popup.h"
 
 #include <QDebug>
 
