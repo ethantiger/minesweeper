@@ -28,12 +28,20 @@ bool Tile::getExplored() {
   return explored;
 }
 
+void Tile::showMine() {
+  if (isMine) {
+    setIcon(QIcon(":/assets/minesweeper_icons/bomb.png"));
+    setIconSize(QSize(size,size));
+  }
+}
+
 int Tile::explore() {
   explored = true;
   setIcon(QIcon());
   this->setStyleSheet("QPushButton {background:#222021;}");
   if (isMine) {
     // end game
+    emit showMines();
     setIcon(QIcon(":/assets/minesweeper_icons/bomb_explode.png"));
     setIconSize(QSize(size,size));
     Popup p("Game Over", "Retry");
@@ -45,16 +53,10 @@ int Tile::explore() {
   }
   if (minesAdjacent) {
     this->setText(QString("%1").arg(minesAdjacent));
+  } else {
+    this->setText("");
   }
   return minesAdjacent;
-}
-
-void Tile::mousePressEvent(QMouseEvent *event) {
-  if (event->button() == Qt::RightButton) {
-    flag();
-  } else {
-    QPushButton::mousePressEvent(event);
-  }
 }
 
 void Tile::flag() {
@@ -75,5 +77,13 @@ void Tile::flag() {
     flagState = BLANK;
     setText("");
     return;
+  }
+}
+
+void Tile::mousePressEvent(QMouseEvent *event) {
+  if (event->button() == Qt::RightButton) {
+    flag();
+  } else {
+    QPushButton::mousePressEvent(event);
   }
 }

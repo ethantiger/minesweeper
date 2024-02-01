@@ -35,11 +35,13 @@ class Tile: public QPushButton {
     int getMinesAdjacent();
     int incrementMinesAdjacent();
     bool getExplored();
+    void showMine();
     int explore();
     void flag();
 
   signals:
     void gameOverReceived();
+    void showMines();
 
 };
 

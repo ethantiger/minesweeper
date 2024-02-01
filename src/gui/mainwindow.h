@@ -21,6 +21,7 @@ class MainWindow: public QWidget {
     void setupWindow();
     void setupGrid();
     void createTiles(int, int);
+    void showMines();
     
 
   private slots:

@@ -48,7 +48,9 @@ void MainWindow::createTiles(int r, int c) {
     if (tileGrid[random_row][random_col]->getMine()) {
       i--;
     } else {
-      tileGrid[random_row][random_col]->setMine(true);
+      Tile *tile = tileGrid[random_row][random_col];
+      tile->setMine(true);
+      connect(tile, &Tile::showMines, this, &MainWindow::showMines);
       // tileGrid[random_row][random_col]->setText("M");
     }  
   }
@@ -73,6 +75,14 @@ void MainWindow::createTiles(int r, int c) {
       if (i + 1  < rows && j - 1 >= 0 && tileGrid[i+1][j-1]->getMine()) tileGrid[i][j]->incrementMinesAdjacent();
       // Check diagonal down right
       if (i + 1 < rows && j + 1 < cols && tileGrid[i+1][j+1]->getMine()) tileGrid[i][j]->incrementMinesAdjacent();
+    }
+  }
+}
+
+void MainWindow::showMines() {
+  for (int i = 0; i < rows; i++) {
+    for (int j = 0; j < cols; j++) {
+      if (tileGrid[i][j]->getMine()) tileGrid[i][j]->showMine();
     }
   }
 }
