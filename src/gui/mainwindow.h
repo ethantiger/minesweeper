@@ -1,3 +1,16 @@
+/**
+ * Ethan Wakefield
+ * 251155260
+ * 
+ * Description:
+ *  Declaration of the MainWindow class.
+ *  MainWindow is the window in which all the other Qt widgets
+ *  will reside.
+ * 
+ * Date:
+ *  1 Feb 2024
+*/
+
 #ifndef MAINWINDOW
 #define MAINWINDOW
 
@@ -22,8 +35,8 @@ class MainWindow: public QWidget {
     void setupGrid();
     void createTiles(int, int);
     void showMines();
+    ~MainWindow();
     
-
   private slots:
     void explore(Tile *, int, int);
     void resetGame();

@@ -1,3 +1,14 @@
+/**
+ * Ethan Wakefield
+ * 251155260
+ * 
+ * Description:
+ *  Entry point of program
+ * 
+ * Date:
+ *  1 Feb 2024
+*/
+
 #include <QApplication>
 #include "./src/gui/mainwindow.h"
 

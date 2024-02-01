@@ -1,26 +1,63 @@
+/**
+ * Ethan Wakefield
+ * 251155260
+ * 
+ * Description:
+ *  Function definitions for the MainWindow class.
+ * 
+ * Date:
+ *  1 Feb 2024
+*/
+
 #include "mainwindow.h"
 
+/**
+ * MainWindow()
+ * Constructor for the MainWindow class.
+ * params: none
+ * returns: MainWindow
+*/
 MainWindow::MainWindow() {
-  // Setup
+  // Indirectly sets up data members
   setupWindow();
   setupGrid();
   createTiles(16,30);
 }
 
+/**
+ * setupWindow()
+ * Sets up the mainwindow
+ * params: none
+ * returns: none
+*/
 void MainWindow::setupWindow() {
   this->resize(1000,540);
   this->setWindowTitle("Minesweeper");
   this->show();
 }
 
+/**
+ * setupGrid()
+ * Sets up the grid layout for the mainwindow
+ * params: none
+ * returns: none
+*/
 void MainWindow::setupGrid() {
   gridLayout = new QGridLayout(this);
   gridLayout->setSpacing(0);
   gridLayout->setContentsMargins(0,0,0,0);
-
   this->setLayout(gridLayout);
 }
 
+/**
+ * createTiles()
+ * creates 2d vector of Tiles class, sets which tiles become mines, and
+ *  calculates number of mines adjacent to each tile.
+ * params: 
+ *  int r (number of rows)
+ *  int c (number of columns)
+ * returns: none
+*/
 void MainWindow::createTiles(int r, int c) {
   tilesRemaining = r * c - 99;
   rows = r;
@@ -28,7 +65,7 @@ void MainWindow::createTiles(int r, int c) {
   tileGrid = std::vector<std::vector<Tile*>>(rows, std::vector<Tile*>(cols));
   for (int i = 0; i < rows; i++) {
     for (int j = 0; j < cols; j++) {
-      Tile *tile = new Tile("", nullptr);
+      Tile *tile = new Tile();
       QObject::connect(tile, &QPushButton::clicked, [this, tile, i, j]() {
           explore(tile,i,j);
       });
@@ -51,7 +88,6 @@ void MainWindow::createTiles(int r, int c) {
       Tile *tile = tileGrid[random_row][random_col];
       tile->setMine(true);
       connect(tile, &Tile::showMines, this, &MainWindow::showMines);
-      // tileGrid[random_row][random_col]->setText("M");
     }  
   }
   // Calculate adjacent mines
@@ -79,6 +115,12 @@ void MainWindow::createTiles(int r, int c) {
   }
 }
 
+/**
+ * showMines()
+ * reveals mines on the loss condition
+ * params: none
+ * returns: none
+*/
 void MainWindow::showMines() {
   for (int i = 0; i < rows; i++) {
     for (int j = 0; j < cols; j++) {
@@ -87,6 +129,16 @@ void MainWindow::showMines() {
   }
 }
 
+/**
+ * explore()
+ * explores the tile, and adjacent tiles if there are no surrounding mines.
+ *  if all mines are explored, win condition is invoked
+ * params:
+ *  Tile *t (a pointer to the tile that is being explored)
+ *  int i (the row that this tile appears in)
+ *  int j (the column that this tile appears in )
+ * returns: none
+*/
 void MainWindow::explore(Tile *t, int i, int j) {
   if (t->getExplored()) return;
   int mines = t->explore();
@@ -120,8 +172,14 @@ void MainWindow::explore(Tile *t, int i, int j) {
   }
 }
 
+/**
+ * resetGame()
+ * resets the tiles in the grid
+ * params: none
+ * returns: none
+*/
 void MainWindow::resetGame() {
-  // // Remove tiles
+  // Remove tiles
   for (auto& row : tileGrid) {
     for (auto& tile : row) {
         if (tile->parent()) {
@@ -133,7 +191,9 @@ void MainWindow::resetGame() {
     row.clear(); // Clear each inner vector
   }
   tileGrid.clear(); // Clear the outer vector
-
   // // Recreate Tiles
   createTiles(16,30);
+}
+
+MainWindow::~MainWindow() {
 }

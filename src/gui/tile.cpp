@@ -1,33 +1,105 @@
+/**
+ * Ethan Wakefield
+ * 251155260
+ * 
+ * Description:
+ *  Function definitions for the Tile class
+ * 
+ * Date:
+ *  1 Feb 2024
+*/
+
 #include "tile.h"
 
-Tile::Tile(const QString &text, QWidget *parent = nullptr): QPushButton(text, parent) {
+/**
+ * mousePressEvent()
+ * controls the mouse press event for a tile
+ * params:
+ *  QMouseEvent *event (mouse event)
+ * returns: none
+*/
+void Tile::mousePressEvent(QMouseEvent *event) {
+  if (event->button() == Qt::RightButton) {
+    flag();
+  } else {
+    QPushButton::mousePressEvent(event);
+  }
+}
+
+/**
+ * Tile()
+ * Constructor for the Tile class
+ * params: none
+ * returns: Tile
+*/
+Tile::Tile() {
   size = 35;
+  isMine = false;
+  minesAdjacent = 0;
+  explored = false;
+  flagState = BLANK;
   this->setStyleSheet("QPushButton {border:1px solid;}");
-  // this->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
   setFixedSize(size,size);
 }
 
+/**
+ * getMine()
+ * returns whether tile is a mine or not
+ * params: none
+ * returns: bool
+*/
 bool Tile::getMine() {
   return isMine;
 }
 
+/**
+ * setMine()
+ * sets the isMine data member to a given boolean
+ * params:
+ *  bool b (whether a tile is a mine or not)
+ * returns: none
+*/
 void Tile::setMine(bool b) {
   isMine = b;
 }
 
+/**
+ * getMinesAdjacent()
+ * returns the number of mines adjacent to the tile
+ * params: none
+ * returns: int
+*/
 int Tile::getMinesAdjacent() {
   return minesAdjacent;
 }
 
+/**
+ * incrementMinesAdjacent()
+ * adds 1 to the minesAdjacent data member and returns it
+ * params: none
+ * returns: int
+*/
 int Tile::incrementMinesAdjacent() {
   minesAdjacent += 1;
   return minesAdjacent;
 }
 
+/**
+ * getExplored()
+ * returns whether the tile was explored already
+ * params: none
+ * returns: bool
+*/
 bool Tile::getExplored() {
   return explored;
 }
 
+/**
+ * showMine()
+ * reveals the Tile as a mine
+ * params: none
+ * returns: none
+*/
 void Tile::showMine() {
   if (isMine) {
     setIcon(QIcon(":/assets/minesweeper_icons/bomb.png"));
@@ -35,6 +107,13 @@ void Tile::showMine() {
   }
 }
 
+/**
+ * explore()
+ * explores a tile. if it is a mine, lose. otherwise reveal number
+ *  of adjacent mines.
+ * params: none
+ * returns: int
+*/
 int Tile::explore() {
   explored = true;
   setIcon(QIcon());
@@ -59,6 +138,12 @@ int Tile::explore() {
   return minesAdjacent;
 }
 
+/**
+ * flag()
+ * conditions for right clicking a tile
+ * params: none
+ * returns: none
+*/
 void Tile::flag() {
   if (explored) return;
   if (flagState == BLANK) {
@@ -80,10 +165,4 @@ void Tile::flag() {
   }
 }
 
-void Tile::mousePressEvent(QMouseEvent *event) {
-  if (event->button() == Qt::RightButton) {
-    flag();
-  } else {
-    QPushButton::mousePressEvent(event);
-  }
-}
+Tile::~Tile() {}

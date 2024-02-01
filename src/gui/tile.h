@@ -1,3 +1,16 @@
+/**
+ * Ethan Wakefield
+ * 251155260
+ * 
+ * Description:
+ *  Declaration of the Tile class.
+ *  The tile class are the buttons aligned in the grid
+ *  of the MainWindow.
+ * 
+ * Date:
+ *  1 Feb 2024
+*/
+
 #ifndef TILE
 #define TILE
 
@@ -6,9 +19,8 @@
 #include <QDialog>
 #include <iostream>
 #include <QMouseEvent>
-#include "popup.h"
-
 #include <QDebug>
+#include "popup.h"
 
 enum FlagStates {
   BLANK,
@@ -20,16 +32,16 @@ class Tile: public QPushButton {
   Q_OBJECT
   private:
     int size;
-    bool isMine = false;
+    bool isMine;
     int minesAdjacent;
-    bool explored = false;
-    FlagStates flagState = BLANK;
+    bool explored;
+    FlagStates flagState;
 
   protected:
     void mousePressEvent(QMouseEvent *event);
 
   public:
-    Tile(const QString &text, QWidget *parent);
+    Tile();
     bool getMine();
     void setMine(bool);
     int getMinesAdjacent();
@@ -38,11 +50,11 @@ class Tile: public QPushButton {
     void showMine();
     int explore();
     void flag();
+    ~Tile();
 
   signals:
     void gameOverReceived();
     void showMines();
-
 };
 
 #endif

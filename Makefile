@@ -836,11 +836,11 @@ moc_mainwindow.cpp: src/gui/mainwindow.h \
 		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtWidgets.framework/Headers/qdialog.h \
 		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtGui.framework/Headers/QMouseEvent \
 		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtGui.framework/Headers/qevent.h \
+		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtCore.framework/Headers/QDebug \
+		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtCore.framework/Headers/qdebug.h \
 		src/gui/popup.h \
 		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtCore.framework/Headers/QCoreApplication \
 		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtCore.framework/Headers/qcoreapplication.h \
-		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtCore.framework/Headers/QDebug \
-		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtCore.framework/Headers/qdebug.h \
 		moc_predefs.h \
 		/opt/homebrew/Cellar/qt@5/5.15.12/bin/moc
 	/opt/homebrew/Cellar/qt@5/5.15.12/bin/moc $(DEFINES) --include /Users/ethanwakefield/Proj/School/3307/minesweeper/moc_predefs.h -I/opt/homebrew/Cellar/qt@5/5.15.12/mkspecs/macx-clang -I/Users/ethanwakefield/Proj/School/3307/minesweeper -I/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtWidgets.framework/Headers -I/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtGui.framework/Headers -I/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtCore.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/15.0.0/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk/usr/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -F/opt/homebrew/Cellar/qt@5/5.15.12/lib src/gui/mainwindow.h -o moc_mainwindow.cpp
@@ -867,13 +867,13 @@ moc_tile.cpp: src/gui/tile.h \
 		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtWidgets.framework/Headers/qdialog.h \
 		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtGui.framework/Headers/QMouseEvent \
 		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtGui.framework/Headers/qevent.h \
+		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtCore.framework/Headers/QDebug \
+		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtCore.framework/Headers/qdebug.h \
 		src/gui/popup.h \
 		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtWidgets.framework/Headers/QGridLayout \
 		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtWidgets.framework/Headers/qgridlayout.h \
 		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtCore.framework/Headers/QCoreApplication \
 		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtCore.framework/Headers/qcoreapplication.h \
-		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtCore.framework/Headers/QDebug \
-		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtCore.framework/Headers/qdebug.h \
 		moc_predefs.h \
 		/opt/homebrew/Cellar/qt@5/5.15.12/bin/moc
 	/opt/homebrew/Cellar/qt@5/5.15.12/bin/moc $(DEFINES) --include /Users/ethanwakefield/Proj/School/3307/minesweeper/moc_predefs.h -I/opt/homebrew/Cellar/qt@5/5.15.12/mkspecs/macx-clang -I/Users/ethanwakefield/Proj/School/3307/minesweeper -I/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtWidgets.framework/Headers -I/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtGui.framework/Headers -I/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtCore.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/15.0.0/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk/usr/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -F/opt/homebrew/Cellar/qt@5/5.15.12/lib src/gui/tile.h -o moc_tile.cpp
@@ -912,11 +912,11 @@ main.o: main.cpp /opt/homebrew/Cellar/qt@5/5.15.12/lib/QtWidgets.framework/Heade
 		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtWidgets.framework/Headers/qdialog.h \
 		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtGui.framework/Headers/QMouseEvent \
 		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtGui.framework/Headers/qevent.h \
+		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtCore.framework/Headers/QDebug \
+		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtCore.framework/Headers/qdebug.h \
 		src/gui/popup.h \
 		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtCore.framework/Headers/QCoreApplication \
-		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtCore.framework/Headers/qcoreapplication.h \
-		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtCore.framework/Headers/QDebug \
-		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtCore.framework/Headers/qdebug.h
+		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtCore.framework/Headers/qcoreapplication.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o main.cpp
 
 mainwindow.o: src/gui/mainwindow.cpp src/gui/mainwindow.h \
@@ -933,11 +933,11 @@ mainwindow.o: src/gui/mainwindow.cpp src/gui/mainwindow.h \
 		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtWidgets.framework/Headers/qdialog.h \
 		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtGui.framework/Headers/QMouseEvent \
 		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtGui.framework/Headers/qevent.h \
+		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtCore.framework/Headers/QDebug \
+		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtCore.framework/Headers/qdebug.h \
 		src/gui/popup.h \
 		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtCore.framework/Headers/QCoreApplication \
-		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtCore.framework/Headers/qcoreapplication.h \
-		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtCore.framework/Headers/QDebug \
-		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtCore.framework/Headers/qdebug.h
+		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtCore.framework/Headers/qcoreapplication.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o src/gui/mainwindow.cpp
 
 popup.o: src/gui/popup.cpp src/gui/popup.h \
@@ -960,13 +960,13 @@ tile.o: src/gui/tile.cpp src/gui/tile.h \
 		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtWidgets.framework/Headers/qdialog.h \
 		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtGui.framework/Headers/QMouseEvent \
 		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtGui.framework/Headers/qevent.h \
+		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtCore.framework/Headers/QDebug \
+		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtCore.framework/Headers/qdebug.h \
 		src/gui/popup.h \
 		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtWidgets.framework/Headers/QGridLayout \
 		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtWidgets.framework/Headers/qgridlayout.h \
 		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtCore.framework/Headers/QCoreApplication \
-		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtCore.framework/Headers/qcoreapplication.h \
-		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtCore.framework/Headers/QDebug \
-		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtCore.framework/Headers/qdebug.h
+		/opt/homebrew/Cellar/qt@5/5.15.12/lib/QtCore.framework/Headers/qcoreapplication.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o tile.o src/gui/tile.cpp
 
 qrc_icons.o: qrc_icons.cpp 
