@@ -165,4 +165,10 @@ void Tile::flag() {
   }
 }
 
+/**
+ * ~Tile()
+ * Destructor for the Tile class.
+ * params: none
+ * returns: None
+*/
 Tile::~Tile() {}

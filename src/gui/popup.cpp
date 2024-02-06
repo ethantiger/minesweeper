@@ -61,4 +61,10 @@ void Popup::setupGrid() {
   this->setLayout(gridLayout);
 }
 
+/**
+ * ~Popup()
+ * Destructor for the Popup class.
+ * params: none
+ * returns: None
+*/
 Popup::~Popup(){}

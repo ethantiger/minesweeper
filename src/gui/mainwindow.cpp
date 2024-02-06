@@ -195,5 +195,11 @@ void MainWindow::resetGame() {
   createTiles(16,30);
 }
 
+/**
+ * ~MainWindow()
+ * Destructor for the MainWindow class.
+ * params: none
+ * returns: None
+*/
 MainWindow::~MainWindow() {
 }

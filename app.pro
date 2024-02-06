@@ -9,5 +9,3 @@ HEADERS += \
     $$PWD/src/gui/*.h
 
 RESOURCES += icons.qrc
-    
-    
